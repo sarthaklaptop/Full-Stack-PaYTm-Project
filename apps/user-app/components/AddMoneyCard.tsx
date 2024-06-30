@@ -20,7 +20,6 @@ export const AddMoney = () => {
     const [amount, setAmount] = useState(0);
     const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || "");
 
-    console.log(`Amount inside AddMoneyCard.tsx is ${amount}`)
 
     return <Card title="Add Money">
     <div className="w-full">
