@@ -5,12 +5,11 @@ import { authOptions } from "../auth";
 import prisma from "@repo/db/client";
 
 export async function createOnrampTransaction (amount: number, provider: string) {
-    // alert("Clicked inside createOnrampTransaction")
+    
     const session = await getServerSession(authOptions);
     const token = Math.random().toString();
     const userId = session?.user?.id;
 
-    // console.log(`Inside OnClick Transactions`)
     
     if(!userId) {
         return {

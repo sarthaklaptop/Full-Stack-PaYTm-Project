@@ -10,7 +10,7 @@ export default function Layout({
         <div className="w-72 border-r border-slate-300 min-h-screen mr-4 pt-28">
             <div>
                 <SidebarItem href={"/dashboard"} icon={<HomeIcon />} title="Dashboard" />
-                <SidebarItem href={"/transfer"} icon={<TransferIcon />} title="Transfer" />
+                <SidebarItem href={"/transfer"} icon={<TransferIcon />} title="Deposit" />
                 <SidebarItem href={"/transactions"} icon={<TransactionsIcon />} title="Transactions" />
                 <SidebarItem href={"/p2p-transfer"} icon={<Person2person />} title="P2P Transactions" />
             </div>

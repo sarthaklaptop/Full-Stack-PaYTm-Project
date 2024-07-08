@@ -3,9 +3,10 @@ import { Button } from "@repo/ui/button";
 import { Card } from "@repo/ui/card";
 import { Center } from "@repo/ui/center";
 import { Select } from "@repo/ui/select";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { TextInput } from "@repo/ui/textinput";
 import { createOnrampTransaction } from "../app/lib/actions/createOnrampTransaction";
+import toast from "react-hot-toast";
 
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
@@ -14,6 +15,12 @@ const SUPPORTED_BANKS = [{
     name: "Axis Bank",
     redirectUrl: "https://www.axisbank.com/"
 }];
+
+async function onButtonClick(amount: number, provider: string) {
+    await createOnrampTransaction(amount * 100, provider);
+    toast.success("Processing Your Transactions")
+
+}
 
 export const AddMoney = () => {
     const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
@@ -37,11 +44,7 @@ export const AddMoney = () => {
             value: x.name
         }))} />
         <div className="flex justify-center pt-4">
-            <Button onClick={async () => {
-                await createOnrampTransaction(amount * 100, provider);
-                // alert(`Clicked OnClick Transactions`)
-                window.location.href = redirectUrl || "";
-            }}>
+            <Button onClick={async () => { onButtonClick(amount, provider) }}>
             Add Money
             </Button>
         </div>
