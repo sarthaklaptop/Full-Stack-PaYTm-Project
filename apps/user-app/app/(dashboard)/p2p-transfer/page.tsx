@@ -14,7 +14,6 @@ async function getRecentP2PTransaction() {
 
     })
 
-    console.log(txns)
 
     return txns.map(t => ({
         time: t.timestamp,

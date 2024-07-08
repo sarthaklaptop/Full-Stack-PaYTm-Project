@@ -10,7 +10,8 @@
     "./center": "./src/Center.tsx",
     "./select": "./src/Select.tsx",
     "./textinput": "./src/TextInput.tsx",
-    "./sendcard": "./src/SendCard.tsx"
+    "./sendcard": "./src/SendCard.tsx",
+    "./showtext": "./src/ShowText.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
