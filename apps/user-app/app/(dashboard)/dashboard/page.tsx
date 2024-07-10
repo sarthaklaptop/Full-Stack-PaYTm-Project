@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth";
-import { ProfileCard } from "../../../components/ProfileCard";
 import { authOptions } from "../../lib/auth";
 import prisma from "@repo/db/client";
 import LineChart from "../../../components/Chart";
@@ -36,24 +35,6 @@ async function getTransactions() {
     const lables = transactions.map(transactions => transactions.startTime.toISOString());
     
     const data = transactions.map(transactions => transactions.amount);
-    
-    console.log("Labels:", lables);
-    console.log("Data:", data);
-
-    // const dataset = {
-    //     label: "GFG",
-    //     data: data,
-    //     fill: false,
-    //     borderColor: 'rgb(75, 192, 192)',
-    //     tension: 0.1,
-    // }
-
-    // console.log(`Dataset ${dataset}`)
-    
-    // const chartData = {
-    //     labels: lables,
-    //     datasets: [dataset],
-    // }
 
     return {
         lables,
@@ -74,13 +55,9 @@ export default async function() {
         <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
             Dashboard
         </div>
-        <div className="gap-4 p-4">
-            <div>
-                <ProfileCard user={user}/>
-            </div>
-        </div>
+        
         <div>
-            <LineChart data={txns}/>
+            <LineChart data={txns} user={user}/>
         </div>
     </div>
 }

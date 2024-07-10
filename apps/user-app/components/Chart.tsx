@@ -1,6 +1,5 @@
-// page.js this is the entry point of application
-
 "use client";
+
 import dynamic from 'next/dynamic';
 import 'chart.js/auto';
 import { Card } from '@repo/ui/card';
@@ -8,8 +7,8 @@ const Line = dynamic(() => import('react-chartjs-2').then((mod) => mod.Line), {
   ssr: false,
 });
 
-const LineChart = ({ data }: any) => {
-    // console.log(data)
+const LineChart = ( {data, user}: any ) => {
+    
     const lables = (data.lables);
     const datasetData = data.data;
 
@@ -17,19 +16,19 @@ const LineChart = ({ data }: any) => {
         labels: lables,
         datasets: [
           {
-            label: 'GeeksforGeeks Line Chart',
+            label: 'Portfolio Value (INR)',
             data: datasetData,
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: '#6a51a6',
             tension: 0.1,
           },
         ],
       };
 
   return (
-    <Card title='Hello'>
-        <div style={{ width: '700px', height: '700px' }}>
-            <h1>Example 1: Line Chart</h1>
+    <Card title={`Hello ${user.name}`}>
+        <div className='flex flex-col w-full '  >
+            {/* <h1>Hello, </h1> */}
             <Line data={chartData} />
         </div>
     </Card>

@@ -7,7 +7,7 @@ import { MdContentCopy } from "react-icons/md"
 export const ProfileCard = ({user}: any) => {
     return(
         <div className="w-3/4">
-            <Card title="Personal information">
+            <Card title="">
                 <div className="py-7 flex flex-col gap-2 ">
                     <div className="grid grid-cols-2 border p-6 items-center bg-white rounded-xl ">
                         <p className="w-1/3 flex items-center">Wallet id</p>
