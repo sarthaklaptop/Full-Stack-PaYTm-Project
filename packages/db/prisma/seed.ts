@@ -51,7 +51,43 @@ async function main() {
       },
     },
   })
-  console.log({ alice, bob })
+
+  const merchant = await prisma.merchant.upsert({
+    where: { email: 'sarthak@gmail.com' },
+    update: {},
+    create: {
+      email: 'sarthak@gmail.com',
+      password: await bcrypt.hash('bob', 10),
+      name: 'Sarthak',
+      MerchantBalance: {
+        create: {
+          amount: 250000,
+          locked: 0,
+        }
+      },
+      MerchantTransaction: {
+        create: {
+          amount: 250000,
+          transactionDate: new Date('2024-02-22')
+        }
+      },
+      Merchantwithdrawal: {
+        create: {
+          amount: 25000,
+          withdrawDate: new Date('2022-12-21') 
+        }
+      },
+      MerchantOnRampTransaction: {
+        create: {
+          startTime: new Date('2022-12-21'),
+          status: "Success",
+          amount: 2000,
+          token: "token__22",
+        }
+      }
+    }
+  })
+  console.log({ alice, bob, merchant})
 }
 main()
   .then(async () => {
