@@ -1,3 +1,4 @@
+import { CiShop } from "react-icons/ci";
 import { SidebarItem } from "../../components/SidebarItem";
 
 export default function Layout({
@@ -13,6 +14,7 @@ export default function Layout({
                 <SidebarItem href={"/transfer"} icon={<TransferIcon />} title="Deposit" />
                 <SidebarItem href={"/transactions"} icon={<TransactionsIcon />} title="Transactions" />
                 <SidebarItem href={"/p2p-transfer"} icon={<Person2person />} title="P2P Transactions" />
+                <SidebarItem href={"/merchant-transfer"} icon={<MerchantTransfer />} title="Merchant Transfer" />
             </div>
         </div>
             {children}
@@ -42,4 +44,8 @@ function Person2person() {
   return <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
     <path d="M7 7h8.586L5.293 17.293l1.414 1.414L17 8.414V17h2V5H7v2z"/>
   </svg>
+}
+
+function MerchantTransfer() {
+  return <CiShop size={24}/>
 }

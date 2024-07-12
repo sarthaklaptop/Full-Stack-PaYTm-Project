@@ -7,9 +7,12 @@ export const OnRampTransactions = ({
         time: Date,
         amount: number,
         // TODO: Can the type of `status` be more specific?
-        status: string
+        status: string,
+        fromUserId: number
     }[]
 }) => {
+
+
     if (!transactions.length) {
         return <Card title="Recent Transactions">
             <div className="text-center pb-8 pt-8">
@@ -34,10 +37,13 @@ export const OnRampTransactions = ({
                                 'Failed'
                             }
                         </span>
-                    
+                        &nbsp; 
                     </div>
                     <div className="text-slate-600 text-xs">
                         {t.time.toDateString()}
+                    </div>
+                    <div className="text-slate-600 text-sm">
+                        from User <span className="text-black">{t.fromUserId}</span> 
                     </div>
                 </div>
                 <div className="flex flex-col justify-center">

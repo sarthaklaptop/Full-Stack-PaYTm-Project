@@ -83,6 +83,7 @@ async function main() {
           status: "Success",
           amount: 2000,
           token: "token__22",
+          fromUserId: alice.id
         }
       }
     }

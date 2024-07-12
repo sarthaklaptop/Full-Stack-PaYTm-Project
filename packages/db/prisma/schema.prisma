@@ -8,15 +8,16 @@ datasource db {
 }
 
 model User {
-  id                Int                 @id @default(autoincrement())
-  email             String?             @unique
-  name              String?
-  number            String              @unique
-  password          String
-  OnRampTransaction OnRampTransaction[]
-  Balance           Balance[]
-  sentTransfers     p2pTransfer[]       @relation(name: "FromUserRelation")
-  receivedTransfers p2pTransfer[]       @relation(name: "ToUserRelation")
+  id                         Int                         @id @default(autoincrement())
+  email                      String?                     @unique
+  name                       String?
+  number                     String                      @unique
+  password                   String
+  OnRampTransaction          OnRampTransaction[]
+  Balance                    Balance[]
+  sentTransfers              p2pTransfer[]               @relation(name: "FromUserRelation")
+  receivedTransfers          p2pTransfer[]               @relation(name: "ToUserRelation")
+  MerchantOnRampTransactions MerchantOnRampTransaction[] @relation(name: "UserMerchantOnRampTransactions")
 }
 
 model Merchant {
@@ -38,6 +39,8 @@ model MerchantOnRampTransaction {
   startTime  DateTime
   merchantId Int
   merchant   Merchant     @relation(fields: [merchantId], references: [id])
+  fromUserId Int
+  fromuser   User         @relation(name: "UserMerchantOnRampTransactions", fields: [fromUserId], references: [id])
 }
 
 model OnRampTransaction {
