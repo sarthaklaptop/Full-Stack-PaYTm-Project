@@ -32,12 +32,12 @@ docker run  -e POSTGRES_PASSWORD=mysecretpassword -d -p 5432:5432 postgres
 
 ## Screenshots
 
-**User Dashboard:**
+### User Dashboard
 ![User_Dashboard](file:///home/sarthaksystumm/Downloads/User_dashboard.png)
 ![User_Deposit](file:///home/sarthaksystumm/Downloads/User_deposit.png)
 ![User_To_Merchant](file:///home/sarthaksystumm/Downloads/User_merchant-transaction.png)
 
-**Merchant Dashboard:**
+### Merchant Dashboard
 ![Merchant_Dashboard](file:///home/sarthaksystumm/Downloads/Merchant_Dashboard.png)
 ![Merchant_Transactions](file:///home/sarthaksystumm/Downloads/Merchant_Transactions.png)
 
