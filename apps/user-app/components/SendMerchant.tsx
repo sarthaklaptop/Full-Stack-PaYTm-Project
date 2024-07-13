@@ -6,10 +6,25 @@ import { TextInput } from "@repo/ui/textinput";
 import { useState } from "react";
 import { p2pTransfer } from "../app/lib/actions/P2PTransfer";
 import { merchantTransfer } from "../app/lib/actions/MerchantTransfer";
+import toast from "react-hot-toast";
+
+interface TransferResponse {
+    success: boolean;
+    message: string;
+}
 
 export function SendMerchant() {
     const [number, setNumber] = useState("");
     const [amount, setAmount] = useState("");
+
+    const handleSend = async () => {
+        const response: TransferResponse | any = await merchantTransfer(number, Number(amount) * 100);
+        if (response.success) {
+          toast.success(response.message);
+        } else {
+          toast.error(response.message);
+        }
+      };
 
     return <div className="h-[90vh] w-full">
         <>
@@ -22,9 +37,12 @@ export function SendMerchant() {
                         setAmount(value)
                     }} />
                     <div className="pt-4 flex justify-center">
-                        <Button onClick={async () => {
-                            await merchantTransfer(number, Number(amount)*100)
-                        }}>Send</Button>
+                        <Button 
+                            onClick={handleSend}
+                        // onClick={async () => {
+                        //     await merchantTransfer(number, Number(amount)*100)
+                        // }}
+                        >Send</Button>
                     </div>
                 </div>
             </Card>

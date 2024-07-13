@@ -30,7 +30,7 @@ export async function merchantTransfer(to: string, amount: number) {
 
     const checkBalance = await prisma.balance.findFirst({
         where: {
-            userId: userId
+            userId: Number(userId)
         }
     })
 
@@ -46,8 +46,56 @@ export async function merchantTransfer(to: string, amount: number) {
         }
     }
 
-    await prisma.$transaction(async (tx) => {
-        
-    })
+    try {
+        await prisma.$transaction(async (tx) => {
+            await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(userId)} FOR UPDATE`;
+            await tx.$queryRaw`SELECT * FROM "MerchantBalance" WHERE "merchantId" = ${Number(to)} FOR UPDATE`;
+    
+            const fromBalance = await tx.balance.findUnique({
+                where: { userId: Number(userId)},
+            });
+    
+            if(!fromBalance) {
+                throw new Error('Your Balance cant be fetched');
+            }
+    
+            if (fromBalance.amount < amount) {
+                // toast.error('Insufficient funds')
+                throw new Error('Insufficient funds');
+            }
+    
+            await tx.balance.update({
+                where: { userId: Number(userId) },
+                data: { amount: { decrement: amount } },
+            });
+    
+            await tx.merchantBalance.update({
+                where: { merchantId: Number(to) },
+                data: { amount: { increment: amount } },
+            })
+    
+            const token = Math.random().toString();
+    
+            await tx.merchantOnRampTransaction.create({
+                data: {
+                    merchantId: Number(to),
+                    amount: amount,
+                    startTime: new Date(),
+                    fromUserId: Number(userId),
+                    status: "Success",
+                    token: token
+                }
+            })
+    
+            // toast.success
+            
+        })
+    } catch (error) {
+        console.error(error);
+        return {
+            success: false,
+            message: error.message
+        };
+    }
 
 }
